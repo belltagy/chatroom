@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'channels',
-
     'chat',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -53,7 +52,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 ASGI_APPLICATION = "chatroom.routing.application"
-
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 ROOT_URLCONF = 'chatroom.urls'
 
 TEMPLATES = [
